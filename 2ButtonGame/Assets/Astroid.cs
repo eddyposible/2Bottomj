@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class Astroid : Obstacle {
     public bool hasDamagedPlayer;
+    public Rigidbody2D asteroidRgb;
+    public float speed;
 
-
-	// Use this for initialization
-	void Start () 
+    void Start ()
     {
-		
-	}
+        asteroidRgb = GetComponent <Rigidbody2D> ();
+    }
 
-	
-	// Update is called once per frame
 	void Update () 
     {
-		
+		asteroidRgb.velocity = Vector2.left * speed;
 	}
 
 
@@ -28,12 +26,11 @@ public class Astroid : Obstacle {
       
 
     }
-    public void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.tag == "Tail" || collision.gameObject.tag == "Player" )
+        if (other.tag == "Tail" || other.tag == "Player" )
         {
-            if(!hasDamagedPlayer)
-            collision.gameObject.GetComponent<Dragon>().RemoveJoint();
+            other.GetComponent<Dragon>().RemoveJoint();            
         }
 
     }

@@ -2,13 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class Boundaries 
+{
+    [Header("Max and Min Boundaries of movement.")]
+    static public float MinY = -16, MaxY = 16;
+}
+
 public class Dragon : MonoBehaviour {
+
+    [Header("Boundaries of movement of player (Y Axis)")]
+    public float minY;
+    public float maxY;
+
+    [Space]
+
     Transform myTransform;
     public GameObject tailSecionPrefab;
     public GameObject lastSection;
     public List<GameObject> tail;
     Rigidbody2D head;
     //movement values
+    [Header("Movement Values.")]
     public float speed;
     public float turnSpeed;
     public float rotationAngle;
@@ -27,6 +42,9 @@ public class Dragon : MonoBehaviour {
         lastSection = this.gameObject;
        speedVector = new Vector2(speed, 0);
         turnSpeedVector = new Vector2(0, turnSpeed);
+
+        Boundaries.MaxY = maxY;
+        Boundaries.MinY = minY;
 
 	}
 	
@@ -68,7 +86,11 @@ public class Dragon : MonoBehaviour {
            // head.AddForce(-turnSpeedVector);
         }
 
-
+            //boundaries Y
+        transform.position = new Vector3 
+			(transform.position.x,
+			Mathf.Clamp(transform.position.y, Boundaries.MinY, Boundaries.MaxY),
+			 0.0f);
 
 	}
 
@@ -76,7 +98,7 @@ public class Dragon : MonoBehaviour {
     {
 
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             moveUp = true;
             //tells the spawners to spawn enemies closer to where we think the player is moving
@@ -85,13 +107,16 @@ public class Dragon : MonoBehaviour {
          
 
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.S))
         {
             moveUp = false;
             //tells the spawners to spawn enemies closer to where we think the player is moving
             oS.StartCorrelation(moveUp);
             eS.StartCorrelation(moveUp);
 
+        } else if (Input.GetKeyDown(KeyCode.A) && Input.GetKeyDown(KeyCode.S))
+        {
+            Debug.Log("FIRE IN THE HOLE...");
         }
     }
    public void AddJoint()
@@ -103,18 +128,25 @@ public class Dragon : MonoBehaviour {
         tail.Add(temp);
 
         lastSection = temp;
+
+        
     }
     public void RemoveJoint()
     {
-        if (tail.Count > 1)
+        if (tail.Count > 0)
         {
             Destroy(tail[tail.Count - 1]);
             tail.RemoveAt(tail.Count - 1);
-            lastSection = tail[tail.Count - 1];
+            if (tail.Count >= 1){
+                lastSection = tail[tail.Count - 1];
+            }else if (tail.Count <= 0){
+                lastSection = this.gameObject;
+            }
         }
         else
         {
             //game over, lose life etc.
+            Debug.Log("Game over / lose life");
         }
     
 
