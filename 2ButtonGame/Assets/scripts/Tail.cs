@@ -17,9 +17,13 @@ public class Tail : MonoBehaviour {
         //myTransform = this.transform;
 
 	}
-	
-	// Update is called once per frame
-	void FixedUpdate () 
+    private void Awake()
+    {
+        myTransform = transform;
+    }
+
+    // Update is called once per frame
+    void FixedUpdate () 
     {
         if(targetTransform != null)
         {
