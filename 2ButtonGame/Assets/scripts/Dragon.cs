@@ -16,17 +16,15 @@ public class Dragon : MonoBehaviour {
     public float maxY;
 
     [Space]
+    [Header ("Configuration.")]
 
+    Animator animator;
     Transform myTransform;
-    public GameObject tailSecionPrefab;
-    public GameObject lastSection;
-    public List<GameObject> tail;
+    public Transform header;
     Rigidbody2D head;
     //movement values
     [Header("Movement Values.")]
-    public float speed;
-    public float turnSpeed;
-    public float rotationAngle;
+    public Attributes attributes;
     Vector2 speedVector;
     Vector2 turnSpeedVector;
     public bool moveUp;
@@ -39,9 +37,10 @@ public class Dragon : MonoBehaviour {
 	void Start () {
         head = GetComponent<Rigidbody2D>();
         myTransform = GetComponent<Transform>();
-        lastSection = this.gameObject;
-       speedVector = new Vector2(speed, 0);
-        turnSpeedVector = new Vector2(0, turnSpeed);
+       speedVector = new Vector2(attributes.speed, 0);
+        turnSpeedVector = new Vector2(0, attributes.turnSpeed);
+        attributes = GetComponent<Attributes> ();
+        animator = GetComponent <Animator> ();
 
         Boundaries.MaxY = maxY;
         Boundaries.MinY = minY;
@@ -50,18 +49,18 @@ public class Dragon : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        if(Input.GetKeyDown(KeyCode.Plus))
+       /* if(Input.GetKeyDown(KeyCode.Plus))
         {
             AddJoint();
         }
         if (Input.GetKeyDown(KeyCode.Minus))
         {
             RemoveJoint();
-        }
+        }*/
 
-        Vector3 refVector = myTransform.position += myTransform.right * speed * Time.deltaTime;
+        Vector3 refVector = myTransform.position += myTransform.right * attributes.speed * Time.deltaTime;
 
-        Vector3.SmoothDamp(myTransform.position, myTransform.right * speed * Time.deltaTime, ref velocity, 1f, speed);
+        Vector3.SmoothDamp(myTransform.position, myTransform.right * attributes.speed * Time.deltaTime, ref velocity, 1f, attributes.speed);
 
     
  
@@ -71,17 +70,16 @@ public class Dragon : MonoBehaviour {
             //this needs to rotate only the sprite
             //myTransform.rotation = Quaternion.Slerp(myTransform.rotation, Quaternion.Euler(0, 0, rotationAngle), speed*  Time.deltaTime);
 
-            myTransform.Translate(0,turnSpeed,0);
-           
+            myTransform.Translate(0,attributes.turnSpeed,0);
+            header.rotation = Quaternion.Euler(0f, 0f, 45f);
            
         }
         else
         {   //this needs to rotate only the sprite
            // myTransform.rotation = Quaternion.Slerp(myTransform.rotation, Quaternion.Euler(0, 0, -rotationAngle), speed * Time.deltaTime);
 
-            myTransform.Translate(0, -turnSpeed, 0);
-      
-
+            myTransform.Translate(0, -attributes.turnSpeed, 0);
+            header.rotation = Quaternion.Euler(0f, 0f, -45f);
            
            // head.AddForce(-turnSpeedVector);
         }
@@ -107,6 +105,7 @@ public class Dragon : MonoBehaviour {
          
 
         }
+        
         if (Input.GetKeyDown(KeyCode.S))
         {
             moveUp = false;
@@ -114,43 +113,14 @@ public class Dragon : MonoBehaviour {
             oS.StartCorrelation(moveUp);
             eS.StartCorrelation(moveUp);
 
-        } else if (Input.GetKeyDown(KeyCode.A) && Input.GetKeyDown(KeyCode.S))
+        }
+        
+        if (Input.GetKeyDown(KeyCode.A) && Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("FIRE IN THE HOLE...");
         }
     }
-   public void AddJoint()
-    {
-
-        GameObject temp = GameObject.Instantiate(tailSecionPrefab, lastSection.transform.position, lastSection.transform.rotation);
-        Tail tempTail = temp.GetComponent<Tail>();
-        tempTail.setTarget(lastSection.transform);
-        tail.Add(temp);
-
-        lastSection = temp;
-
-        
-    }
-    public void RemoveJoint()
-    {
-        if (tail.Count > 0)
-        {
-            Destroy(tail[tail.Count - 1]);
-            tail.RemoveAt(tail.Count - 1);
-            if (tail.Count >= 1){
-                lastSection = tail[tail.Count - 1];
-            }else if (tail.Count <= 0){
-                lastSection = this.gameObject;
-            }
-        }
-        else
-        {
-            //game over, lose life etc.
-            Debug.Log("Game over / lose life");
-        }
-    
-
-    }
+   
 
        
 }

@@ -14,14 +14,14 @@ public class Tail : MonoBehaviour {
     public float catchupTreshold;
 	// Use this for initialization
 	void Start () {
-        myTransform = this.transform;
+        //myTransform = this.transform;
 
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () 
     {
-        if(targetTransform!=null)
+        if(targetTransform != null)
         {
             distance = Vector3.Distance(myTransform.position, targetTransform.position);
 
@@ -36,7 +36,7 @@ public class Tail : MonoBehaviour {
                     moveSpeed = defaultSpeed;
                 }
                 myTransform.rotation = Quaternion.Slerp(
-                    myTransform.rotation,Quaternion.LookRotation(targetTransform.position - myTransform.position), rotationSpeed * Time.deltaTime);
+                myTransform.rotation,Quaternion.LookRotation(targetTransform.position - myTransform.position), rotationSpeed * Time.deltaTime);
                 myTransform.position += myTransform.forward * moveSpeed * Time.deltaTime;
             }
            

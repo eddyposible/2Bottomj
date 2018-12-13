@@ -28,9 +28,9 @@ public class Astroid : Obstacle {
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Tail" || other.tag == "Player" )
+        if (other.tag == "Body" )
         {
-            other.GetComponent<Dragon>().RemoveJoint();            
+            other.GetComponent<Body_tail_Joints>().RemoveJoint();            
         }
 
     }

@@ -4,8 +4,7 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-
-
+    private const string Tag = "Player";
     public Transform myTransform;
     public Transform player;
     public float moveSpeed;
@@ -16,54 +15,41 @@ public abstract class Enemy : MonoBehaviour
     public int level;
     public bool hasDamagedTail;
 
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    private void Awake()
+    void Awake ()
     {
         //the enemys transform
-        myTransform = this.transform;
+        myTransform = transform;
         //locating the player
-        player = GameObject.Find("Player").transform;
+        player = GameObject.FindGameObjectWithTag(tag: "Body").transform;
         hasDamagedTail = false;
-
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-
-    }
     public void OnTriggerEnter2D(Collider2D collision)
     {
 
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Body")
         {
 
-            if (collision.gameObject.GetComponent<Dragon>() != null)
+            if (collision.gameObject.GetComponent<Body_tail_Joints>().tail.Count >= level)
             {
-                if (collision.gameObject.GetComponent<Dragon>().tail.Count >= level*3)
-                {
-                    collision.gameObject.GetComponent<Dragon>().AddJoint();
+                    player.GetComponentInParent<Body_tail_Joints>().AddJoint();
                     Destroy(this.gameObject);
-                }
-                else
-                {
-                    collision.gameObject.GetComponent<Dragon>().RemoveJoint();
-                   
-                   // Destroy(this.gameObject);
-                }
-
             }
-        }
-        if (collision.gameObject.tag == "Tail")
-        {
-            if(!hasDamagedTail)
-            player.GetComponentInParent<Dragon>().RemoveJoint();
+            else
+            {
+            collision.gameObject.GetComponent<Body_tail_Joints>().RemoveJoint();
+               
+            // Destroy(this.gameObject);
+            }
+
+             if (collision.tag == "Tail" || collision.tag == "Body" || collision.tag == "Player")
+            {
+                if(!hasDamagedTail){
+                    player.GetComponentInParent<Body_tail_Joints>().RemoveJoint();
+                }
+            
+            }
+
         }
     }
 }
