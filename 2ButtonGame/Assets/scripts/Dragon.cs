@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
+/*[System.Serializable]
 public class Boundaries 
 {
     [Header("Max and Min Boundaries of movement.")]
     static public float MinY = -16, MaxY = 16;
-}
+}*/
 
 public class Dragon : MonoBehaviour {
 
-    [Header("Boundaries of movement of player (Y Axis)")]
+   /* [Header("Boundaries of movement of player (Y Axis)")]
     public float minY;
     public float maxY;
-
+ */
     [Space]
     [Header ("Configuration.")]
 
@@ -42,8 +42,8 @@ public class Dragon : MonoBehaviour {
         attributes = GetComponent<Attributes> ();
         animator = GetComponent <Animator> ();
 
-        Boundaries.MaxY = maxY;
-        Boundaries.MinY = minY;
+        //Boundaries.MaxY = maxY;
+        //Boundaries.MinY = minY;
 
 	}
 	
@@ -85,10 +85,10 @@ public class Dragon : MonoBehaviour {
         }
 
             //boundaries Y
-        transform.position = new Vector3 
+        /*transform.position = new Vector3 
 			(transform.position.x,
 			Mathf.Clamp(transform.position.y, Boundaries.MinY, Boundaries.MaxY),
-			 0.0f);
+			 0.0f);*/
 
 	}
 

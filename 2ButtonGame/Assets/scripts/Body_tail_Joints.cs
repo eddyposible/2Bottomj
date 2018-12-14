@@ -20,7 +20,7 @@ public class Body_tail_Joints : MonoBehaviour {
 	public void AddJoint()
     {
 
-        GameObject temp_pref = Instantiate(tailSecionPrefab,lastSection.position,lastSection.rotation) as GameObject;
+        GameObject temp_pref = Instantiate(tailSecionPrefab,lastSection.position,Quaternion.Euler(0,0,0)) as GameObject;
         Tail tempTail = temp_pref.GetComponent<Tail> ();
         tempTail.setTarget(lastSection.transform);
         tail.Add(temp_pref);

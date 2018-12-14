@@ -6,7 +6,6 @@ public class Shrimp : Enemy
 {
 
     public float homingModifier;
-    public float destroyDistance;
 
 
     // Use this for initialization
@@ -24,12 +23,7 @@ public class Shrimp : Enemy
         float distanceForAngle = Vector2.Distance(myTransform.position, tempVector);
         float angle = (Mathf.Pow(Mathf.Cos(distanceForAngle / distance), -1) * 57.2957795f);
   
-        if (level <= 2) //straigth movement
-        {
-            myTransform.Translate(-moveSpeed, 0, 0);
-        }
-
-        if (level >= 3) //starts homing 
+        if (level >= 2) //starts homing 
         {
             
         
@@ -51,23 +45,8 @@ public class Shrimp : Enemy
                     Vector2 targetVector2 = new Vector2(player.transform.position.x, player.transform.position.y);
                     myTransform.position = Vector2.Lerp(myVector2, targetVector2, homingModifier);
                 }
-                
-            
-            }
-            else
-            {
-                myTransform.Translate(-moveSpeed, 0, 0);
-            }
-         
+            }         
 
-        }
-
-        if (distance > destroyDistance)
-        {
-            Destroy(this);
         }
     }
-
-  
-
 }

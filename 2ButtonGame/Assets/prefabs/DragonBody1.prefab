@@ -75,7 +75,7 @@ CircleCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 2.4281359, y: 0.3265519}
   serializedVersion: 2
@@ -110,7 +110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eating: {fileID: 0}
-  tailSecionPrefab: {fileID: 1727525612387140, guid: f6affdd3fe85143b18404d9e06bcd9e5,
+  header: {fileID: 0}
+  tailSecionPrefab: {fileID: 1026048906023472, guid: 4778c5cccfc31b04aa6ac6d77189f91d,
     type: 2}
   lastSection: {fileID: 0}
   tail: []

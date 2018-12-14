@@ -129,11 +129,11 @@ MonoBehaviour:
   myTransform: {fileID: 4274695096409888}
   player: {fileID: 0}
   moveSpeed: 0
-  rotationSpeed: 20
+  rotationSpeed: 0
   rangeMin: 30
   rangeMax: 30
   stop: 0
   level: 0
   hasDamagedTail: 0
+  bodyTailJoints: {fileID: 0}
   homingModifier: 0.05
-  destroyDistance: 100

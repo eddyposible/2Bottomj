@@ -6,6 +6,7 @@ public class Tail : MonoBehaviour {
     public Transform myTransform; 
     public Transform targetTransform;
     //public Vector2 distance;
+    public float Accuracy = 5.0f;
     public float followThreshold;
     public float moveSpeed;
     public float defaultSpeed;
@@ -17,28 +18,28 @@ public class Tail : MonoBehaviour {
         //myTransform = this.transform;
 
 	}
-	
-	// Update is called once per frame
-	void FixedUpdate () 
+    private void Awake()
+    {
+        myTransform = transform;
+    }
+
+    // Update is called once per frame
+    void FixedUpdate () 
     {
         if(targetTransform != null)
         {
-            distance = Vector3.Distance(myTransform.position, targetTransform.position);
+            
 
-            if (distance > followThreshold)
+              
+            /*myTransform.rotation = Quaternion.Slerp(
+            myTransform.rotation,Quaternion.LookRotation(targetTransform.position - myTransform.position), rotationSpeed * Time.deltaTime);*/
+            Vector3 difference = targetTransform.position - this.transform.position;
+		    float rotationZ = Mathf.Atan2(difference.y,difference.x) * Mathf.Rad2Deg;
+		    transform.rotation = Quaternion.Euler(0f,0f,rotationZ);
+            if(difference.magnitude > Accuracy)
             {
-                if (distance > followThreshold +catchupTreshold) 
-                {
-                    moveSpeed = moveSpeed + Mathf.Abs(distance);
-                }
-                else
-                {
-                    moveSpeed = defaultSpeed;
-                }
-                myTransform.rotation = Quaternion.Slerp(
-                myTransform.rotation,Quaternion.LookRotation(targetTransform.position - myTransform.position), rotationSpeed * Time.deltaTime);
-                myTransform.position += myTransform.forward * moveSpeed * Time.deltaTime;
-            }
+                transform.position += difference.normalized * Time.deltaTime * defaultSpeed;
+            }        
            
         }
 		

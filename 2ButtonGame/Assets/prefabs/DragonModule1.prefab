@@ -110,10 +110,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myTransform: {fileID: 4409712860449998}
   targetTransform: {fileID: 0}
+  Accuracy: 0.9
   followThreshold: 1
-  moveSpeed: 15
-  defaultSpeed: 15
-  rotationSpeed: 50
+  moveSpeed: 30
+  defaultSpeed: 30
+  rotationSpeed: 30
   distance: 0
   catchupTreshold: 1
 --- !u!212 &212172884277980012
