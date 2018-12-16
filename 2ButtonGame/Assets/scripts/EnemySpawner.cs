@@ -7,23 +7,20 @@ public class EnemySpawner : ObjectSpawner {
     public List<Enemy> enemies;
     public int enemySelector;
     public float verticalSpawnRange;
+    public float timeSinceStart = 15f;
    
 
     public float frequency;
-	// Use this for initialization
-	void Start () {
-       // GameObject.Instantiate(enemies[enemySelector]);
-        StartCoroutine(SpawnCoroutine());
-	}
 	
-	// Update is called once per frame
-	void Update () {
+	void Start ()
+    {
+        Invoke("StartCo",timeSinceStart);
+    }
 
-
-		
-	}
-
-
+    void StartCo()
+    {
+        StartCoroutine(SpawnCoroutine());
+    }
 
     //spawns an enemy with random properties
     IEnumerator SpawnCoroutine()

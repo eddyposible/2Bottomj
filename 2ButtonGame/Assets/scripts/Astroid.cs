@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Astroid : Obstacle {
-    public bool hasDamagedPlayer;
     public Rigidbody2D asteroidRgb;
     public float speed;
+    public Body_tail_Joints body;
 
     void Start ()
     {
         asteroidRgb = GetComponent <Rigidbody2D> ();
+        body = GameObject.FindGameObjectWithTag("Body").GetComponent<Body_tail_Joints>();
     }
 
 	void Update () 
@@ -20,17 +21,16 @@ public class Astroid : Obstacle {
 
     private void Awake()
     {
-       
-        SetSizeRandom();
-        hasDamagedPlayer = false;
-      
+          
 
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Body" )
+        if (other.tag == "Body" || other.tag == "Player" || other.tag == "Tail")
         {
-            other.GetComponent<Body_tail_Joints>().RemoveJoint();            
+            if(body.recentlyRemoved == false){
+                body.RemoveJoint();
+            }           
         }
 
     }

@@ -8,6 +8,8 @@ TagManager:
   - Head
   - Tail
   - Body
+  - Elite
+  - Projectile
   layers:
   - Default
   - TransparentFX

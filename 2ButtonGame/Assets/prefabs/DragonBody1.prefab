@@ -74,12 +74,12 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 1
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 2.4281359, y: 0.3265519}
+  m_Offset: {x: 2.8396392, y: 0.2343185}
   serializedVersion: 2
-  m_Radius: 1.4688745
+  m_Radius: 1.3198814
 --- !u!95 &95332226747208944
 Animator:
   serializedVersion: 3
@@ -111,10 +111,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eating: {fileID: 0}
   header: {fileID: 0}
-  tailSecionPrefab: {fileID: 1026048906023472, guid: 4778c5cccfc31b04aa6ac6d77189f91d,
+  tailSecionPrefab: {fileID: 1600415262427394, guid: 80d0d283619fe7442bedc4a0e4a34944,
     type: 2}
   lastSection: {fileID: 0}
   tail: []
+  Explotion: {fileID: 1931741900136544, guid: f9575a2cbd37ecb44aa82dceb42558d3, type: 2}
 --- !u!114 &114899292472366370
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -126,14 +127,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961c44570b96e0e4aaa8e579d5755689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myTransform: {fileID: 4863304054047988}
-  targetTransform: {fileID: 0}
-  followThreshold: 1
-  moveSpeed: 20
-  defaultSpeed: 20
-  rotationSpeed: 50
-  distance: 1
-  catchupTreshold: 0.5
+  speed: 25
+  accuracy: 1
+  goal: {fileID: 0}
 --- !u!212 &212034464986274092
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -168,7 +164,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 4ae261c69dec9f742afd644d09e4bb6b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

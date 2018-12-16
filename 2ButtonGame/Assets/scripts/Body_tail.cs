@@ -16,13 +16,14 @@ public class Body_tail : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        Vector3 difference = goal.position - this.transform.position;
+        Vector3 difference = (goal.position -  new Vector3(.5f,0,0)) - this.transform.position;
 		float rotationZ = Mathf.Atan2(difference.y,difference.x) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.Euler(0f,0f,rotationZ);
         if(difference.magnitude > accuracy)
         {
 			transform.position += difference.normalized * Time.deltaTime * speed;
-	    }
+	    }  
+        
 		
 	}
    public void setTarget(Transform targetTransform)

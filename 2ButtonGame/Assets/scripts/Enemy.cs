@@ -16,6 +16,7 @@ public abstract class Enemy : MonoBehaviour
     public int level;
     public bool hasDamagedTail;
     public Body_tail_Joints bodyTailJoints;
+    public GameObject Explotion_dead;
 
     // Use this for initialization
     void Start()
@@ -42,7 +43,7 @@ public abstract class Enemy : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collision)
     {
 
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Body" || collision.gameObject.tag == "Player")
         {
             print("collision detected");
 
@@ -50,15 +51,21 @@ public abstract class Enemy : MonoBehaviour
             {
                 print("dragon collision detected");
                 if (bodyTailJoints.tail.Count >= level)
-                {
+                {   
+                    if(level >= 2){
+                        bodyTailJoints.meterBar +=1;
+                    }
                     print("addjoint");
                     bodyTailJoints.AddJoint();
+                    Instantiate(Explotion_dead, transform.position,Quaternion.identity);
                     Destroy(this.gameObject);
                 }
                 else
                 {
-                    bodyTailJoints.RemoveJoint();
-                   
+                        if (bodyTailJoints.recentlyRemoved == false)
+                    {
+                        bodyTailJoints.RemoveJoint();
+                    }        
                    // Destroy(this.gameObject);
                 }
 
@@ -66,9 +73,17 @@ public abstract class Enemy : MonoBehaviour
         }
         if (collision.gameObject.tag == "Tail")
         {
-            if (!hasDamagedTail)
-                bodyTailJoints.RemoveJoint();
-
+            
+            if (bodyTailJoints.recentlyRemoved == false)
+                    {
+                        bodyTailJoints.RemoveJoint();
+                    }
+        }
+        if (collision.gameObject.tag == "Projectile")
+        {
+            bodyTailJoints.AddJoint();
+            Instantiate(Explotion_dead, transform.position,Quaternion.identity);
+            Destroy(this.gameObject);
         }
     }
 }

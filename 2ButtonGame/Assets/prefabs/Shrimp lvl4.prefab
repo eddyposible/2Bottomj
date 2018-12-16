@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 33029563962209142}
   - component: {fileID: 58343492180964458}
   - component: {fileID: 114720777999435346}
-  - component: {fileID: 114544483674521188}
   m_Layer: 0
   m_Name: Shrimp lvl4
   m_TagString: Enemy
@@ -102,18 +101,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &114544483674521188
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1878715611435124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77d63d137fb87f84080e03fd6ba1b2ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Projectile: {fileID: 0}
 --- !u!114 &114720777999435346
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -146,7 +133,9 @@ MonoBehaviour:
   rangeMin: 30
   rangeMax: 30
   stop: 0
-  level: 2
+  level: 3
   hasDamagedTail: 0
   bodyTailJoints: {fileID: 0}
   homingModifier: 0.05
+  Projectile: {fileID: 0}
+  Spawn: {fileID: 0}

@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Rotate : MonoBehaviour {
 
-    public float rotateSpeed;
+    public float rotateSpeed = 1;
+    public bool right;
+    public bool up;
+    public bool forward;
 
    
 
@@ -18,7 +21,10 @@ public class Rotate : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        transform.Rotate(Vector3.forward * Time.deltaTime);
+        if (right) { transform.Rotate(Vector3.right * Time.deltaTime * rotateSpeed); }
+        if (up) { transform.Rotate(Vector3.up * Time.deltaTime * rotateSpeed); }
+        if (forward) { transform.Rotate(Vector3.forward * Time.deltaTime * rotateSpeed);}
+        
 		
 	}
 }

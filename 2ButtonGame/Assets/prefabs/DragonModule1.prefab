@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4409712860449998}
   - component: {fileID: 212172884277980012}
   - component: {fileID: 95841910543968206}
-  - component: {fileID: 114660436323760642}
   - component: {fileID: 58601513171881484}
   - component: {fileID: 50026949177986380}
+  - component: {fileID: 114486692606480144}
   m_Layer: 0
   m_Name: DragonModule1
   m_TagString: Tail
@@ -73,7 +73,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -97,7 +97,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114660436323760642
+--- !u!114 &114486692606480144
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,18 +105,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1026048906023472}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fe802acfc02f4cc8bfccf930733f70b, type: 3}
+  m_Script: {fileID: 11500000, guid: 961c44570b96e0e4aaa8e579d5755689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myTransform: {fileID: 4409712860449998}
-  targetTransform: {fileID: 0}
-  Accuracy: 0.9
-  followThreshold: 1
-  moveSpeed: 30
-  defaultSpeed: 30
-  rotationSpeed: 30
-  distance: 0
-  catchupTreshold: 1
+  speed: 25
+  accuracy: 1.5
+  goal: {fileID: 0}
 --- !u!212 &212172884277980012
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -151,7 +145,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 1cc96f238493d544f804cf6642f68595, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

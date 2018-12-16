@@ -6,47 +6,103 @@ public class Shrimp : Enemy
 {
 
     public float homingModifier;
+    public GameObject Projectile;
+    public Transform Spawn;
+    public Animator animator;
+    public Body_tail_Joints dragon;
+    public bool isShooting = false;
 
-
-    // Use this for initialization
     void Start()
     {
-
+        animator = GetComponent<Animator> ();
+        dragon = GameObject.FindGameObjectWithTag("Body").GetComponent<Body_tail_Joints>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         
         float distance = Vector2.Distance(myTransform.position, player.position);
         Vector2 tempVector = new Vector2(player.position.x, myTransform.position.y);
-        float distanceForAngle = Vector2.Distance(myTransform.position, tempVector);
-        float angle = (Mathf.Pow(Mathf.Cos(distanceForAngle / distance), -1) * 57.2957795f);
+        Vector3 difference = transform.position - player.position;
+
+        if (level== 0 || level == 1){
+                if (dragon.tail.Count < level)
+                {
+                    animator.SetBool("Blue", true);
+                } else
+                {
+                animator.SetBool("Blue", false);
+                }
+        }
   
-        if (level >= 2) //starts homing 
+        if (level == 2) //starts homing 
         {
             
+            if (dragon.tail.Count < level)
+            {
+                animator.SetBool("Blue", true);
+            } else
+            {
+                animator.SetBool("Blue", false);
+            }
         
 
 
              if (distance <= rangeMax )
             {
 
-
+                
                 if (myTransform.position.x > player.transform.position.x)
                 {
-
-                    myTransform.Rotate(0, 0, angle);
-
-
-                   
-
-                    Vector2 myVector2 = new Vector2(myTransform.position.x, myTransform.position.y);
-                    Vector2 targetVector2 = new Vector2(player.transform.position.x, player.transform.position.y);
-                    myTransform.position = Vector2.Lerp(myVector2, targetVector2, homingModifier);
+                    myTransform.position = Vector2.Lerp(transform.position, player.position, homingModifier);
                 }
             }         
 
         }
+
+        if (level == 3)
+        {
+
+            if (dragon.tail.Count < level)
+            {
+                animator.SetBool("Blue", true);
+            } else
+            {
+                animator.SetBool("Blue", false);
+            }
+
+            if(distance <=  rangeMax)
+            {
+                if(!isShooting)
+                {  
+                StartCoroutine(ShootingProjectile());
+                isShooting = true;
+                }
+                StartCoroutine(Movement());
+                
+            }
+
+        }
+    }
+
+    IEnumerator Movement()
+    {
+        yield return new WaitForSeconds(1);
+        if (myTransform.position.x > player.transform.position.x )
+        {
+
+            myTransform.position = Vector2.Lerp(transform.position, player.position, homingModifier);
+        } else
+        {
+            myTransform.position += Vector3.left * moveSpeed*Time.deltaTime;
+        }
+    }
+
+    IEnumerator ShootingProjectile(){
+        animator.SetBool("Shoot",true);
+        Instantiate(Projectile,Spawn.position,Quaternion.identity);
+        yield return new WaitForEndOfFrame();
+        animator.SetBool("Shoot", false);
+        StopCoroutine(ShootingProjectile());
     }
 }
