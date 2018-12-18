@@ -17,12 +17,14 @@ public class Body_tail_Joints : MonoBehaviour {
     [Range(0,4)]
     public int meterBar;
     public bool recentlyRemoved = false;
-
+    public AudioManager audioManager;
 	// Use this for initialization
 	void Start () {
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         lastSection = this.transform;
         header = GameObject.FindGameObjectWithTag("Head");
         eating = header.GetComponent<Eating_script> ();
+            audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         
 	}
 
@@ -49,6 +51,9 @@ public class Body_tail_Joints : MonoBehaviour {
         if (tail.Count > 0)
         {
             Instantiate(Explotion,tail[tail.Count-1].transform.position,Quaternion.identity);
+
+         //   audioManager.PlayAudioRandom("playerTakeDamage");
+
             Destroy(tail[tail.Count - 1]);
             tail.RemoveAt(tail.Count - 1);
             if (tail.Count >= 1){
@@ -61,6 +66,7 @@ public class Body_tail_Joints : MonoBehaviour {
         }
         else
         {
+            audioManager.PlayAudioRandom("playerDeath");
             dragon.SetActive(false);
             Instantiate(Explotion_dead,transform.position, Quaternion.identity);
             fade.SetActive(true);

@@ -63,28 +63,39 @@ public class MusicManager : MonoBehaviour
     }
     public void IntensityUp()
     {
-        if (currentMusicGroup.Length < intensityLevel)
+
+        if (currentMusicGroup.Length >intensityLevel)
         {
             intensityLevel++;
+            StopAllCoroutines();
             SetMusicIntensity(currentMusicGroup, intensityLevel);
+            print("intensity level :" + intensityLevel);
         }
    
     }
     public void IntensityDown()
     {
+        
         if (intensityLevel>0)
         {
             intensityLevel--;
+            StopAllCoroutines();
             SetMusicIntensity(currentMusicGroup, intensityLevel);
         }
    
     }
     public void SetIntensity(int intensity)
     {
-        if (intensity >= 0 && intensity < currentMusicGroup.Length)
-        {
-            SetMusicIntensity(currentMusicGroup, intensity);
-        }
+        print("set intensity" + intensity);
+        intensityLevel = intensity;
+        StopAllCoroutines();
+        SetMusicIntensity(currentMusicGroup, intensity);
+
+    }
+    public void StopAllMusic()
+    {
+        StopMusic(mainMusicGroup);
+        StopMusic(eliteMusicGroup);
     }
 
 
@@ -221,7 +232,10 @@ public class MusicManager : MonoBehaviour
             StartMusic(mainMusicGroup, true, fadeInTime);
 
         }
-
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            GoToMainMusicFromElite();
+        }
 
 
 
@@ -242,7 +256,7 @@ public class MusicManager : MonoBehaviour
         {
             if (audioSource.volume < 0.05)
             {
-                print("fade out har set");
+             //  print("fade out har set");
                 audioSource.volume = 0;
                 yield return null;
             }

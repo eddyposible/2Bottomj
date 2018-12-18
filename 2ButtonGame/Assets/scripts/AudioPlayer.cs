@@ -12,7 +12,7 @@ public class AudioPlayer : MonoBehaviour {
 	int randomNumber;
 	List<int> oldRandoms;
 	public float pitchRandomization;
-	public float[] oldVolume;
+	public float oldVolume;
     public int count=0;
     public string[] namesForTargeting; // Should be made to match in list order with audioClips so either name all files or just mind the ordering in the editor
     Dictionary<string, AudioClip> clips = new Dictionary<string, AudioClip>();
@@ -88,14 +88,18 @@ public class AudioPlayer : MonoBehaviour {
     //stops audio
     public void StopAll()
 	{
-		for (int i = 0; i < audioClips.Count; i++) 
+        oldVolume = audioSource.volume;
+        audioSource.volume = 0;
+        audioSource.Stop();
+        audioSource.volume = oldVolume;
+		/*for (int i = 0; i < audioClips.Count; i++) 
 		{
 			oldVolume [i] = audioSource.volume;
 			audioSource.volume = 0; 
 			 
 			audioSource.Stop();  
 			audioSource.volume = oldVolume[i] ; 
-		}
+		}*/
 	}
     public void ResetCounter()
     {

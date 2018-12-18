@@ -5,8 +5,14 @@ using UnityEngine;
 public class lightbeam : MonoBehaviour {
 
 	public float speed;
+    public AudioManager audioManager;
 
-	void Update () {
+    private void Awake()
+    {
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+
+    }
+    void Update () {
 		transform.position += Vector3.right * speed* Time.deltaTime;
 	}
 
@@ -15,7 +21,10 @@ public class lightbeam : MonoBehaviour {
 		if(other.tag == "Elite"){
 			
 			Elite_behaviour elite =	other.GetComponent<Elite_behaviour>();
+            elite.life = elite.life - 1;
+            audioManager.PlayAudioRandom("enemyDeath");
 			Destroy(this.gameObject);
+
 		}
 	}
 }

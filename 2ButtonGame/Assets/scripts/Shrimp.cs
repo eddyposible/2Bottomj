@@ -11,11 +11,13 @@ public class Shrimp : Enemy
     public Animator animator;
     public Body_tail_Joints dragon;
     public bool isShooting = false;
+    public AudioManager audioManager;
 
     void Start()
     {
         animator = GetComponent<Animator> ();
         dragon = GameObject.FindGameObjectWithTag("Body").GetComponent<Body_tail_Joints>();
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
     void FixedUpdate()
@@ -101,6 +103,9 @@ public class Shrimp : Enemy
     IEnumerator ShootingProjectile(){
         animator.SetBool("Shoot",true);
         Instantiate(Projectile,Spawn.position,Quaternion.identity);
+
+        audioManager.PlayAudioRandom("enemyRangedAttack");
+
         yield return new WaitForEndOfFrame();
         animator.SetBool("Shoot", false);
         StopCoroutine(ShootingProjectile());
