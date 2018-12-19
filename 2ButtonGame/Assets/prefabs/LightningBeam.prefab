@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212611160745543098}
   m_Layer: 0
   m_Name: LightningBeamGlow2
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 212572676930814400}
   m_Layer: 0
   m_Name: LightningBeamGlow1
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 212244105397036298}
   m_Layer: 0
   m_Name: LightningBeamVisual
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 212331364841210526}
   m_Layer: 0
   m_Name: LightningBeamGlow3
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -218,6 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 80
+  audioManager: {fileID: 0}
 --- !u!114 &114325631703643198
 MonoBehaviour:
   m_ObjectHideFlags: 1

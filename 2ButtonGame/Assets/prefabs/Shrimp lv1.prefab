@@ -83,7 +83,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.05926931, y: -0.055782914}
@@ -144,12 +144,14 @@ MonoBehaviour:
   bodyTailJoints: {fileID: 0}
   Explotion_dead: {fileID: 1542700120808158, guid: d90c552e85ac6c94a888328d01865ee5,
     type: 2}
+  audioManager: {fileID: 0}
   homingModifier: 0.05
   Projectile: {fileID: 0}
   Spawn: {fileID: 0}
   animator: {fileID: 0}
   dragon: {fileID: 0}
   isShooting: 0
+  audioManager: {fileID: 0}
 --- !u!212 &212214499674172162
 SpriteRenderer:
   m_ObjectHideFlags: 1
